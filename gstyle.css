@@ -1,0 +1,120 @@
+/* Base styles for the page */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the form on the page */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Styles for the Google Translate form */
+.translate-form {
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.24);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 700px;
+    width: 100%;
+}
+
+.translate-form h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+/* Styles for the input fields and select boxes */
+.form-input,
+.select-box {
+    display: block;
+    width: 100%;
+    margin: 16px 0;
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.form-input:focus,
+.select-box:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 2px rgba(66,133,244,.25);
+}
+
+/* Styles for the translate button */
+.translate-btn {
+    display: block;
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    transition: background-color .25s ease;
+    cursor: pointer;
+}
+
+.translate-btn:hover {
+    background-color: #3367d6;
+}
+
+/* Styles for the output area and error message */
+.output-area,
+.error-message {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.output-area {
+    padding: 16px;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+}
+
+.error-message {
+    color: #f44336;
+    font-weight: 500;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .translate-form {
+        padding: 16px;
+    }
+
+    .form-input,
+    .select-box {
+        margin: 12px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .translate-form {
+        padding: 12px;
+    }
+
+    .form-input,
+    .select-box {
+        margin: 8px 0;
+    }
+
+    .translate-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

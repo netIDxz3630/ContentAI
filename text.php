@@ -8,7 +8,7 @@ if(isset($_POST['text'])) {
     $text = $_POST['text'];
     // Call the chatgpt function with the user's input
     $response = chatgpt($text);
-    // Output the response to the user
+    // Output the character count and response to the user
     echo $response;
 } else {
     // output a message indicating that no text was received

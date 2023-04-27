@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Translate</title>
+  <link rel="stylesheet" href="gstyle.css">
+</head>
+<body>
+<form class="translate-form">
+  <label for="input-language-select" class="form-label">Input Language:</label>
+  <select id="input-language-select" class="select-box">
+    <option value="en">English</option>
+    <option value="es">Spanish</option>
+    <option value="fr">French</option>
+  </select>
+  <label for="output-language-select" class="form-label">Output Language:</label>
+  <select id="output-language-select" class="select-box">
+    <option value="en">English</option>
+    <option value="es">Spanish</option>
+    <option value="fr">French</option>
+  </select>
+  <label for="input-text" class="form-label">Input Text:</label>
+  <input type="text" id="input-text" class="form-input" placeholder="Enter text to translate">
+  <button type="submit" class="translate-btn">Translate</button>
+</form>
+<div id="output-area" class="output-area">
+  Translated text will appear here
+</div>
+</body>
+</html>
