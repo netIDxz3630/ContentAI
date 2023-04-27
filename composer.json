@@ -1,0 +1,16 @@
+{
+    "name": "user/chatgpt",
+    "autoload": {
+        "psr-4": {
+            "User\\Chatgpt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ceciliazhang"
+        }
+    ],
+    "require": {
+        "orhanerday/open-ai": "^4.7"
+    }
+}

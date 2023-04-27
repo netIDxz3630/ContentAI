@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Content AI</title>
+    <meta name="viewport" content="width = device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+<div class = "wrapper">
+    <div class="title">Content AI</div>
+    <div id="form" class="form">
+        <div class="bot-inbox inbox">
+            <div class="icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="msg-header">
+                <div class="message">Nice to meet you today!
+                    <span>Please paste your content below </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Input field for user to enter text or URL -->
+    <div class="typing-field">
+        <div class="input-data">
+            <textarea id="data" type="text" placeholder="Type something or Paste URL here.." required></textarea>
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#send-btn").on("click", function(){
+            send_message()
+        });
+    });
+
+    $(document).keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){ // "Enter" keycode
+            console.log("Enter key pressed")
+            send_message()
+        }
+    });
+
+
+    function send_message(){
+        let value = $("#data").val();
+        let isUrl = validateURL(value);
+        let msg = '<div class="user-inbox inbox"><div class="msg-header"><p>'+ value +'</p></div></div>';
+        $("#form").append(msg);
+        $("#data").val('');
+
+        // Add waiting message
+        let waitMsg = '<div class="bot-inbox inbox waiting-msg"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p class="pulse">Working on it . . .</p></div></div>';
+        $(".form").append(waitMsg);
+
+        // Send the user's message to the PHP backend for processing
+        // start ajax code
+        $.ajax({
+            url: isUrl ? 'url_test.php' : 'text.php',
+            type: 'POST',
+            data: isUrl ? 'url='+value : 'text='+value,
+            success: function(result){
+                // // if the user entered a URL, display the original content as well
+                // if (isUrl) {
+                //     $(".form").append('<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>Original content:</p><p>' + result + '</p></div></div>');
+                // }
+                // Remove waiting message
+                $(".waiting-msg").remove();
+
+                let replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>Rewritten content is ready for review.</p><p>'+ result +'</p></div></div>';
+                $("#form").append(replay);
+                // when chat goes down the scroll bar automatically comes to the bottom
+                $("#form").scrollTop($("#form")[0].scrollHeight);
+            }
+        });
+    }
+
+    function validateURL($url) { // Function to validate if a given string is a URL
+        let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test($url);
+    }
+</script>
+
+
+</body>
+</html>
