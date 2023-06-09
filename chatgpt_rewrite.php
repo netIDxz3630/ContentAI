@@ -9,7 +9,7 @@ use Orhanerday\OpenAi\OpenAi;
 function chatgpt($text)
 {
     // Put OpenAi key in here
-    $open_ai = new OpenAi('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');
+//     
     // Get text from input box
     if (isset($_POST['text'])) {
         $text = $_POST['text'];
